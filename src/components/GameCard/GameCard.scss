@@ -1,0 +1,26 @@
+.number-card {
+    border: 0.5px solid #ED5517;
+    border-radius: 8px;
+    padding: 38px 0px;
+    min-height: 94px;
+    width: 80px;
+    text-align: center;
+    border: 0.5px solid #0A0A0C;
+    cursor: pointer;
+    margin-bottom: 15px;
+
+    &_guessed {
+        border: 1px solid #0A0A0C;
+        cursor:default;
+    }
+
+    &_active {
+        border: 0.5px solid #ED5517;
+        box-shadow: none;
+    }
+
+    &:hover {
+        box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.15);
+    }
+}
+

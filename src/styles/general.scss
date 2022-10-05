@@ -1,0 +1,29 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1;
+    font-size: 16px;
+    font-weight: 400;
+    color: $colorBlack;
+    background-color: $colorBackground;
+}
+
+h1 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 72px;
+}
+
+p {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+}
+
+.wrapper {
+    padding: 0 30px;
+    margin: 0 auto;
+    width: #{"min(100%, 745px)"};
+}
