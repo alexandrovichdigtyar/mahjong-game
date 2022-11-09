@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import GameCard from "./components/GameCard/GameCard";
-import { getRandomCards } from "./utils/helpers/App";
 import "./App.scss";
 
 function App() {
@@ -16,55 +15,39 @@ function App() {
     }, 5000);
   };
 
-  const getActiveCards = () => {
-    return cardsData.filter(
-      (card) => card.isHidden === false && card.guessed === false
-    );
+  const getRandomNumber = (min, max) => {
+    const rand = min - 0.5 + Math.random() * (max - min + 1);
+    return Math.round(rand);
   };
 
-  const onCardClick = (id, isHidden) => {
-    setCardsData(
-      cardsData.map((item) =>
-        item.id === id ? { ...item, isHidden: !isHidden } : item
-      )
-    );
+  const isUniqueCardValue = (initialCards, newValue) => {
+    return !initialCards.find((card) => card.value === newValue);
   };
 
-  const checkIsVisible = (visibleCards, card) => {
-    if (visibleCards.length === 2) {
-      let areIdenticalValues = true;
+  const getRandomCards = () => {
+    let initialCards = [];
 
-      visibleCards.forEach((visibleCard) => {
-        if (visibleCard.value !== card.value) {
-          areIdenticalValues = false;
-        }
-      });
+    while (initialCards.length < 32) {
+      const newValue = getRandomNumber(1, 60);
 
-      if (areIdenticalValues) {
-        const newCards = cardsData.map((card) => {
-          if (card.isHidden === false) {
-            return {
-              ...card,
-              guessed: true,
-            };
+      if (isUniqueCardValue(initialCards, newValue)) {
+        initialCards.push(
+          {
+            value: newValue,
+            isHidden: false,
+            id: initialCards.length,
+            guessed: false,
+          },
+          {
+            value: newValue,
+            isHidden: false,
+            id: initialCards.length + 1,
+            guessed: false,
           }
-          return card;
-        });
-        setCardsData(newCards);
-      }
-
-      if (!areIdenticalValues) {
-        const newCards = cardsData.map((card) => {
-          if (card.isHidden === false && card.guessed === false) {
-            return { ...card, isHidden: true };
-          }
-
-          return card;
-        });
-
-        setTimeout(() => setCardsData(newCards), 500);
+        );
       }
     }
+    return initialCards.sort(() => Math.random() - 0.5);
   };
 
   useEffect(() => {
@@ -79,11 +62,10 @@ function App() {
           <GameCard
             key={card.id}
             card={card}
+            isHidden={card.isHidden}
             cardsData={cardsData}
             setCardsData={setCardsData}
-            getActiveCards={getActiveCards}
-            onCardClick={onCardClick}
-            checkIsVisible={checkIsVisible}
+            id={card.id}
           />
         ))}
       </div>
