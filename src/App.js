@@ -18,7 +18,7 @@ function App() {
 
   const getActiveCards = () => {
     return cardsData.filter(
-      (card) => card.isHidden === false && card.guessed === false
+      (card) => !card.isHidden && !card.guessed
     );
   };
 
@@ -42,7 +42,7 @@ function App() {
 
       if (areIdenticalValues) {
         const newCards = cardsData.map((card) => {
-          if (card.isHidden === false) {
+          if (!card.isHidden) {
             return {
               ...card,
               guessed: true,
@@ -55,7 +55,7 @@ function App() {
 
       if (!areIdenticalValues) {
         const newCards = cardsData.map((card) => {
-          if (card.isHidden === false && card.guessed === false) {
+          if (!card.isHidden && !card.guessed) {
             return { ...card, isHidden: true };
           }
 
