@@ -1,35 +1,55 @@
-const getRandomNumber = (min, max) => {
-  const rand = min - 0.5 + Math.random() * (max - min + 1);
-  return Math.round(rand);
+const getPrimeNums = (minNum, maxNum) => {
+  const primeNumsList = [];
+
+  for (let i = minNum; i < maxNum; i++) {
+    isPrimeNum(i) && primeNumsList.push(i);
+  }
+
+  return primeNumsList;
 };
 
-const isUniqueCardValue = (initialCards, newValue) => {
-  return !initialCards.find((card) => card.value === newValue);
-};
+const isPrimeNum = (currentNum) => {
+  let isPrime = true;
 
-export const getRandomCards = () => {
-  let initialCards = [];
+  if (currentNum <= 1) {
+    return false;
+  }
 
-  while (initialCards.length < 32) {
-    const newValue = getRandomNumber(1, 60);
-
-    if (isUniqueCardValue(initialCards, newValue)) {
-      initialCards.push(
-        {
-          value: newValue,
-          isHidden: false,
-          id: initialCards.length,
-          guessed: false,
-        },
-        {
-          value: newValue,
-          isHidden: false,
-          id: initialCards.length + 1,
-          guessed: false,
-        }
-      );
+  for (let i = 2; i < currentNum; i++) {
+    if (currentNum % i === 0) {
+      isPrime = false;
     }
   }
 
-  return initialCards.sort(() => Math.random() - 0.5);
+  return isPrime;
+};
+
+export const getRandomCards = () => {
+  const primeNums = getPrimeNums(2, 55);
+  const gameCards = getGameCards(primeNums);
+
+  return gameCards.sort(() => Math.random() - 0.5);
+};
+
+const getGameCards = (primeNums) => {
+  const initialCards = [];
+
+  primeNums.forEach((num) => {
+    initialCards.push(
+      {
+        value: num,
+        isHidden: false,
+        id: initialCards.length,
+        guessed: false,
+      },
+      {
+        value: num,
+        isHidden: false,
+        id: initialCards.length + 1,
+        guessed: false,
+      }
+    );
+  });
+
+  return initialCards;
 };
