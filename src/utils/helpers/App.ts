@@ -1,5 +1,7 @@
-const getPrimeNums = (minNum, maxNum) => {
-  const primeNumsList = [];
+import { GameCardType } from "./types";
+
+const getPrimeNums = (minNum: number, maxNum: number) => {
+  const primeNumsList: number[] = [];
 
   for (let i = minNum; i < maxNum; i++) {
     isPrimeNum(i) && primeNumsList.push(i);
@@ -8,8 +10,8 @@ const getPrimeNums = (minNum, maxNum) => {
   return primeNumsList;
 };
 
-const isPrimeNum = (currentNum) => {
-  let isPrime = true;
+const isPrimeNum = (currentNum: number) => {
+  let isPrime: boolean = true;
 
   if (currentNum <= 1) {
     return false;
@@ -25,14 +27,14 @@ const isPrimeNum = (currentNum) => {
 };
 
 export const getRandomCards = () => {
-  const primeNums = getPrimeNums(2, 55);
-  const gameCards = getGameCards(primeNums);
+  const primeNums: number[] = getPrimeNums(2, 55);
+  const gameCards: GameCardType[] = getGameCards(primeNums);
 
   return gameCards.sort(() => Math.random() - 0.5);
 };
 
-const getGameCards = (primeNums) => {
-  const initialCards = [];
+const getGameCards = (primeNums: number[]) => {
+  const initialCards: GameCardType[] = [];
 
   primeNums.forEach((num) => {
     initialCards.push(
