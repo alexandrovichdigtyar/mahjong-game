@@ -4,15 +4,15 @@ import { CardPropsType } from "./types";
 import "./GameCard.scss";
 
 const GameCard = ({ checkIsVisible, card, getActiveCards, onCardClick }: CardPropsType) => {
-  const {id, isHidden } = card;
+  const { id, isHidden } = card;
 
   const updateCards = () => {
-    const activeCards:GameCardType[] | null = getActiveCards();
+    const activeCards: GameCardType[] | null = getActiveCards();
 
     checkIsVisible(activeCards, card);
   };
 
-  const getCardStyles = ():string => {
+  const getCardStyles = (): string => {
     if (card.guessed) {
       return "number-card number-card_guessed";
     }
