@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { useEffect, useState } from "react";
 import GameCard from "./components/GameCard/GameCard";
 import { getRandomCards } from "./utils/helpers/App";
-import { GameCardType } from './utils/helpers/types';
+import { GameCardType } from "./utils/helpers/types";
 import "./App.scss";
 
 function App(): ReactElement {
